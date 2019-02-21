@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<!--
+Created using JS Bin
+http://jsbin.com
+
+Copyright (c) 2019 by anonymous (http://jsbin.com/fuhabiwati/1/edit)
+
+Released under the MIT license: http://jsbin.mit-license.org
+-->
+<meta name="robots" content="noindex">
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>JS Bin</title>
+<style id="jsbin-css">
+@import url('https://fonts.googleapis.com/css?family=Cardo');
+
+body{
+  margin:0px;
+}
+
+header p{
+  font-family: 'Cardo';
+ 
+}
+
+header > .in{
+  position: absolute;
+  right: 80px;
+  top: 40px;
+}
+
+header > .git{
+  position: absolute;
+  right: 10px;
+  top: 40px;
+  width: 50px;
+}
+
+header{
+  padding: 10px;
+  background: radial-gradient(#5d5dab,#414182,#5050a0);
+  color: white;
+  display: flex;
+  position: relative;
+}
+
+canvas{
+  position:absolute;
+
+  z-index: -1;
+  
+}
+
+main{
+  height: -webkit-fill-available;
+  position: relative;
+}
+
+.text{
+  z-index:0;
+}
+
+main p {
+  margin:0px;
+}
+
+main p.title{
+  padding: 10px;
+  font-size: 30px;
+}
+
+.text > section{
+  display: grid;
+  grid-template-columns: auto auto auto;
+}
+
+.site > p{
+  margin: 10px;
+  font-size: 20px;
+}
+</style>
+</head>
+<body>
+  <header>
+    <div class="text">
+      <p>Krishna Vadapalli</p>
+      <p>vadapallikrishna@gmail.com</p>
+    </div>
+    <img class="git" src="github.png"/>
+    <img class="in" src="in.png"/>
+  </header>
+  <main>
+    <canvas></canvas>
+    <section class="text">
+    <p class="title">Portfolio</p>
+    <section>
+      <div class="site">
+        <p> Qashti </p>
+        <iframe src="http://www.qashti.com">
+        </iframe>
+      </div>
+      <div class="site">
+        <p> Grafity </p>
+        <iframe src="http://www.grafity.app">
+        </iframe>
+      </div>
+      <div class="site">
+        <p> Car Taxi </p>
+        <iframe src="https://ride.qashti.com">
+        </iframe>
+      </div>
+      <div class="site">
+        <p> Qut id</p>
+        <iframe src="https://ride.qashti.com">
+        </iframe>
+      </div>
+    </section>
+    </section>
+  </main>
+<script id="jsbin-javascript">
+window.onload = function(){
+  var canvas = document.querySelector('canvas');
+  var context = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = "600";
+ 
+  
+  var counter = 0;
+  
+  
+  var animation = function(){
+    context.save();
+    context.fillStyle = "#FFFACD";
+    context.fillRect(0,0,canvas.width,canvas.height);
+    var colors = ['#f9f1cf','#df96dc','#ce0a3b','#630944','#49062e']
+
+    let stroke = false;
+    for(var i=0;i<100;i++){
+        
+        context.beginPath();
+        context.arc(Math.random()*1000, Math.random()*1000, (i*25)%100, 0, Math.PI * 2);
+        context.closePath();
+    
+        if(stroke){
+          context.strokeStyle = colors[(counter+i)%colors.length];
+          stroke = false;
+          context.stroke();
+        }else {
+          context.fillStyle = colors[(counter+i)%colors.length];
+          stroke = true;
+          context.fill();
+        }
+    }
+    
+    setTimeout(()=>requestAnimationFrame(animation),2000);
+    counter++;
+    context.restore();
+  }
+  
+  requestAnimationFrame(animation);
+  
+}
+</script>
+</body>
+</html>
